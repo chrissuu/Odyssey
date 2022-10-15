@@ -20,7 +20,7 @@ class OdysseyVoice:
         self.engine = engine
         self.USERNAME = USERNAME
         self.BOTNAME = BOTNAME
-        self.pauseThreshold = 1
+        self.pauseThreshold = 0.5
         self.OdysseyCmds = OdysseyCmds
 
     def speak(self, text):
@@ -45,6 +45,7 @@ class OdysseyVoice:
 
         r = sr.Recognizer()
         with sr.Microphone() as source:
+            r.adjust_for_ambient_noise(source)
             print('Listening....')
             r.pause_threshold = self.pauseThreshold
             audio = r.listen(source)
